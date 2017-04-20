@@ -8,7 +8,14 @@ apis.get = function (request, reply) {
 };
 
 var server = new hapi.Server();
-server.connection({port:8080});
+server.connection({
+	port:3000,
+ 	routes: { cors: {
+    	credentials: true,
+        origin: ["*"]
+        } 
+    }
+});
 
 server.route([
     { method: 'GET', path: '/', config: { handler: apis.get } }

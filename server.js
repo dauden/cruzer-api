@@ -8,7 +8,7 @@ apis.get = function (request, reply) {
 };
 
 var server = new hapi.Server();
-server.connection({port:80});
+server.connection({port:8080});
 
 server.route([
     { method: 'GET', path: '/', config: { handler: apis.get } }

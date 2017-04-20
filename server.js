@@ -9,7 +9,7 @@ apis.get = function (request, reply) {
 
 var server = new hapi.Server();
 server.connection({
-	port:3000,
+	port: process.env.PORT || 3000,
  	routes: { cors: {
     	credentials: true,
         origin: ["*"]

@@ -1,5 +1,3 @@
-var hapi = require('hapi');
-
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('sql12169727', 'sql12169727', 'eyfagbaq4q',{
   host: 'sql12.freemysqlhosting.net',
@@ -12,10 +10,7 @@ var sequelize = new Sequelize('sql12169727', 'sql12169727', 'eyfagbaq4q',{
 });
 
 var Members = sequelize.define('members', {
-  id: {
-  	type: Sequelize.INTEGER.UNSIGNED,
-  	primaryKey: true
-  },
+  id: Sequelize.INTEGER,
   FullName: Sequelize.STRING(60),
   Facebook: Sequelize.STRING(256),
   NickName: Sequelize.STRING(25),
@@ -26,7 +21,7 @@ var Members = sequelize.define('members', {
   Job: Sequelize.STRING(50),
   PlaceNumber: Sequelize.STRING(10),
   Vehicle: Sequelize.STRING(20),
-  Year: Sequelize.STRING(4)
+  Model: Sequelize.STRING(4),
 });
 
 sequelize.sync().then(function() {
@@ -41,35 +36,10 @@ sequelize.sync().then(function() {
 	Job: 'Software Enginnering',
 	PlaceNumber: '51F-236.52',
 	Vehicle: 'Cruze',
-	Year: '2015'
+	Model: '2015',
   });
 }).then(function(data) {
   console.log(data);
 });
 
 console.log(123);
-
-var apis = {};
-
-apis.get = function (request, reply) {
-
-    reply('Success!\n');
-};
-
-var server = new hapi.Server();
-server.connection({
-	port: process.env.PORT || 3000,
- 	routes: { cors: {
-    	credentials: true,
-        origin: ["*"]
-        } 
-    }
-});
-
-server.route([
-    { method: 'GET', path: '/', config: { handler: apis.get } }
-]);
-
-server.start(function () {
-    console.log('Server started at [' + server.info.uri + ']');
-});

@@ -21,5 +21,4 @@ RUN chown -R node:node /api
 USER node
 
 EXPOSE 9000
-CMD ["node app.js"]
-RUN grunt build
+CMD ["node server.js"]
